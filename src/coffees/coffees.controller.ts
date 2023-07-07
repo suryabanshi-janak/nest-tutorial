@@ -7,31 +7,34 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+import { CoffeesService } from './coffees.service';
 
 @Controller('coffees')
 export class CoffeesController {
+  constructor(private readonly coffeesService: CoffeesService) {}
+
   @Get()
   findAll() {
-    return 'This returns a list of all coffees';
+    return this.coffeesService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return `This return a ${id} coffee`;
+    return this.coffeesService.findOne(id);
   }
 
   @Post()
   create(@Body() body) {
-    return body;
+    return this.coffeesService.create(body);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() body) {
-    return `This update ${id} coffee with data: ${JSON.stringify(body)}`;
+    return this.coffeesService.update(id, body);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return `This delete ${id} coffee`;
+    return this.coffeesService.remove(id);
   }
 }
