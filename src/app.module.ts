@@ -1,3 +1,4 @@
+// import * as Joi from 'joi';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
@@ -9,6 +10,10 @@ import appConfig from './config/app.config';
 @Module({
   imports: [
     ConfigModule.forRoot({
+      // validationSchema: Joi.object({
+      //   DATABASE_HOST: Joi.required(),
+      //   DATABASE_PORT: Joi.required().default(5432),
+      // }),
       load: [appConfig],
     }),
     CoffeesModule,
