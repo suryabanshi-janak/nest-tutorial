@@ -13,6 +13,7 @@ import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto/pagination-query.dto';
 import { ApiForbiddenResponse, ApiTags } from '@nestjs/swagger';
+import { Public } from 'src/common/decorators/public.decorators';
 
 @ApiTags('coffees')
 @Controller('coffees')
@@ -21,6 +22,7 @@ export class CoffeesController {
 
   // @ApiResponse({ status: 403, description: 'Forbidden' })
   @ApiForbiddenResponse({ description: 'Forbidden' })
+  @Public()
   @Get()
   findAll(@Query() paginationQuery: PaginationQueryDto) {
     return this.coffeesService.findAll(paginationQuery);
